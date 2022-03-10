@@ -6,14 +6,14 @@ defmodule OneToMany.Business.Store do
   @timestamps_opts [type: :utc_datetime_usec]
   schema "stores" do
     field :name, :string
-    belongs_to :company, Company
+    belongs_to :company, OneToMany.Business.Company
     timestamps()
   end
 
   @doc false
   def changeset(store, attrs) do
     store
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :company_id])
     |> validate_required([:name])
   end
 end

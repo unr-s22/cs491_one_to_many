@@ -21,3 +21,5 @@ Repo.insert_all(
   ],
   on_conflict: :nothing
 )
+
+mix(run(priv / repo / seeds.exs))

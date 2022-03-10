@@ -1,6 +1,7 @@
 defmodule OneToManyWeb.CompanyController do
   use OneToManyWeb, :controller
 
+  alias OneToMany.Repo
   alias OneToMany.Business
   alias OneToMany.Business.Company
 
@@ -27,7 +28,10 @@ defmodule OneToManyWeb.CompanyController do
   end
 
   def show(conn, %{"id" => id}) do
-    company = Business.get_company!(id)
+    company =
+      Business.get_company!(id)
+      |> Repo.preload(:stores)
+
     render(conn, "show.html", company: company)
   end
 
